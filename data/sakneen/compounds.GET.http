@@ -1,0 +1,5 @@
+GET https://app.sakneen.com/apis/marketplace/compounds?limit=10000&page=1
+origin: https://www.sakneen.com
+referer: https://www.sakneen.com/
+app-request-origin: sakneen-platform
+Content-type: application/json

@@ -1,0 +1,13 @@
+POST https://app.sakneen.com/apis/marketplace/filters?sort=financial_plan.monthly_payment&limit=10000000 HTTP/1.1
+origin: https://www.sakneen.com
+referer: https://www.sakneen.com/
+app-request-origin: sakneen-platform
+Content-type: application/json
+
+{
+  "range": {},
+  "multiple": {},
+  "exact": {},
+  "match": { "location_slug": "ain-sokhna" }
+}
+

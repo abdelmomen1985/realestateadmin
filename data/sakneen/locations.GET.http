@@ -1,0 +1,5 @@
+GET https://app.sakneen.com/apis/cities/locations
+origin: https://www.sakneen.com
+referer: https://www.sakneen.com/
+app-request-origin: sakneen-platform
+Content-type: application/json
