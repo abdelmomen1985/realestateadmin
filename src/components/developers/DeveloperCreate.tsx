@@ -1,34 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Create,
+  ResourceComponentInjectedProps,
   SimpleForm,
   TextInput,
-  Create,
   useRedirect,
-  ResourceComponentInjectedProps,
 } from "react-admin";
-
 import { string_to_slug } from "../../utils/common";
+import { transformDeveloper } from "../../utils/transforms";
 import CustomSFormToolbar from "../utils/CustomSFormToolbar";
+import DropImageToFire from "../utils/DropImageToFire";
 
 export default function DeveloperCreate(props: ResourceComponentInjectedProps) {
   const redirect = useRedirect();
-
+  const [logoUrl, setLogoUrl] = useState("");
+  useEffect(() => {
+    console.log("%c Mo2Log logoUrl changed", "background: #bada55", logoUrl);
+  }, [logoUrl]);
   return (
     <Create
       {...props}
+      options={{ logoURL: logoUrl }}
       onSuccess={() => {
         redirect("list", props.basePath);
       }}
-      transform={(data) => {
-        console.log(data);
-        data.slug_en = string_to_slug(data.name.en);
-        data.slug_ar = string_to_slug(data.name.ar);
-        return data;
-      }}
+      transform={transformDeveloper}
     >
       <SimpleForm toolbar={<CustomSFormToolbar />}>
         <TextInput source="name.ar" />
         <TextInput source="name.en" />
+
+        <DropImageToFire />
       </SimpleForm>
     </Create>
   );

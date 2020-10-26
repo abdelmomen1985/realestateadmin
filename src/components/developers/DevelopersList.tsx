@@ -16,7 +16,7 @@ export const DeveloperList = (props: any) => {
         {/* <TextField source="id" /> */}
         <TextField source="name.ar" headerClassName={classes.header} />
         <FunctionField
-          render={(record) => `${record?.name?.en} #`}
+          render={(record) => `${record?.name?.en}`}
           headerClassName={classes.header}
           label="Name.en"
         />

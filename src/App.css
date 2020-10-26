@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.editor-ar .ql-editor {
+  direction: rtl;
+  text-align: right;
+}
+
+.photo-upload-dd {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: dashed 0.15em #ccc;
+}
+
+.fullwidth {
+  width: 100% !important;
+}

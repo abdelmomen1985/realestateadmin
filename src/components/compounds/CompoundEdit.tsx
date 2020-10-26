@@ -7,15 +7,13 @@ import {
   TextInput,
   DateInput,
 } from "react-admin";
+import { transformCompound } from "../../utils/transforms";
+import CompoundForm from "./CompoundForm";
 
 export const CompoundEdit = (props: any) => (
-  <Edit {...props}>
-    <SimpleForm>
-      <ReferenceInput source="developer_id" reference="developers">
-        <SelectInput optionText="name.ar" />
-      </ReferenceInput>
-      <TextInput source="name.ar" />
-      <TextInput source="name.en" />
-    </SimpleForm>
-  </Edit>
+  <>
+    <Edit {...props} transform={transformCompound}>
+      <CompoundForm />
+    </Edit>
+  </>
 );

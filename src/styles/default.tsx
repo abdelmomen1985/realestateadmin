@@ -4,6 +4,9 @@ const useMyDefaultStyles = makeStyles({
   header: {
     fontWeight: "bold",
   },
+  fullwidth: {
+    width: "100%",
+  },
 });
 
 export { useMyDefaultStyles };

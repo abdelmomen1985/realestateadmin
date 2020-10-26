@@ -9,6 +9,7 @@ import {
   useRedirect,
 } from "react-admin";
 
+import generator from "generate-password";
 export default function UserCreate(props: ResourceComponentInjectedProps) {
   const redirect = useRedirect();
   return (
@@ -21,6 +22,11 @@ export default function UserCreate(props: ResourceComponentInjectedProps) {
         transform={(data) => {
           console.log(data);
           data.username = data.email;
+          data.passwired = generator.generate({
+            length: 12,
+            numbers: true,
+            symbols: true,
+          });
           return data;
         }}
       >
