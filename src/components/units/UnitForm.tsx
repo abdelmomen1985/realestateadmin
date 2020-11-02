@@ -10,13 +10,21 @@ export default function UnitForm(props: any) {
   return (
     <SimpleForm {...props}>
       <Grid container spacing={3} className={classes.fullwidth}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6}>
           <ReferenceInput source="property_type_id" reference="property_types">
             <SelectInput optionText="name.en" />
           </ReferenceInput>
         </Grid>
-        <Grid item xs={12} md={6}></Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6}>
+          <SelectInput
+            source="finishing_type"
+            choices={[
+              { id: "FF", name: "FF" },
+              { id: "SF", name: "SF" },
+            ]}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <ReferenceInput source="compound_id" reference="compounds">
             <SelectInput optionText="name.en" />
           </ReferenceInput>

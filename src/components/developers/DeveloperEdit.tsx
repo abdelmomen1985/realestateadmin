@@ -1,16 +1,15 @@
-import { Button, Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 // @ts-ignore
 import RichTextInput from "ra-input-rich-text";
 import React, { useState } from "react";
 import {
   Edit,
-  FunctionField,
   ResourceComponentInjectedProps,
   SimpleForm,
   TextInput,
 } from "react-admin";
 import { transformDeveloper } from "../../utils/transforms";
-import DropImageToFire from "../utils/DropImageToFire";
+import SingleImage from "../utils/SingleImage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,38 +27,11 @@ const CustomArea = ({ record = {}, source }: any) => (
 */
 
 export default function DeveloperEdit(props: ResourceComponentInjectedProps) {
-  const [changeLogo, setChangeLogo] = useState(false);
   const classes = useStyles();
   return (
     <Edit {...props} transform={transformDeveloper} className={classes.root}>
       <SimpleForm>
-        {changeLogo ? (
-          <DropImageToFire />
-        ) : (
-          <FunctionField
-            fullWidth
-            render={(record) => {
-              if (record?.media?.logo)
-                return (
-                  <img
-                    src={record?.media?.logo}
-                    style={{ maxWidth: "250px" }}
-                  />
-                );
-              return <DropImageToFire />;
-            }}
-            label="Logo"
-          />
-        )}
-        {!changeLogo && (
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => setChangeLogo(true)}
-          >
-            Change Image
-          </Button>
-        )}
+        <SingleImage mediaIndex="logo" />
         <Grid container spacing={3} className={classes.fullwidth}>
           <Grid item xs={12} md={6}>
             <TextInput source="name.ar" className={classes.fullwidth} />

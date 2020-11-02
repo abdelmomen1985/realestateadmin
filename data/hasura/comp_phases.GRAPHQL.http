@@ -1,0 +1,17 @@
+POST https://feasible-narwhal-77.hasura.app/v1/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query comp_phases($compound_id:uuid!){
+  comp_phases (where:{compound_id:{_eq:$compound_id}}){
+    id
+    phase_name
+    delivery_month
+    delivery_year
+    compound_id
+  }
+}
+
+{
+  "compound_id":"bb1516c2-986d-4e48-9666-2934ee6532bf"
+}

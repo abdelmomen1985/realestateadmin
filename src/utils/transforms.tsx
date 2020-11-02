@@ -14,12 +14,19 @@ export const transformDeveloper = (data: Record) => {
 };
 
 export const transformCompound = (data: Record) => {
+  console.log("%c Mo2Log transformCompound data ", "background: #bada55", data);
   data.media = { logo: data.internal?.url };
   delete data.internal;
   let compound = data as CompoundType;
   data.slug_en = string_to_slug(data.name.en);
   data.slug_ar = string_to_slug(data.name.ar);
   return compound as Record;
+};
+
+export const transformPropertyType = (data: Record) => {
+  data.media = { icon: data.internal?.url };
+  delete data.internal;
+  return data;
 };
 
 export const transformUnit = (data: Record) => {

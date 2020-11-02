@@ -9,3 +9,7 @@ export function string_to_slug(str: string) {
 
   return str;
 }
+
+export function sleep(ms: number) {
+  new Promise((resolve) => setTimeout(resolve, ms));
+}
