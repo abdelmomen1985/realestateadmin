@@ -12,44 +12,63 @@ import {
 } from "react-admin";
 import { useMyDefaultStyles } from "../../styles/default";
 
-const UnitsListFilter = (props: any) => (
-  <Filter {...props}>
-    {/**
-      <ReferenceInput source="compound_id" reference="compounds">
+const UnitsListFilter = (props: any) => {
+  // First get filtered compounds list
+  return (
+    <Filter {...props}>
+      {/**
+      <ReferenceInput
+        label="Compound"
+        source="compound_id"
+        reference="compounds"
+        alwaysOn
+      >
         <SelectInput optionText="name.en" />
       </ReferenceInput>
-      
-    <ReferenceInput
-      label="Compound"
-      source="compound_id"
-      reference="compounds"
-      alwaysOn
-    >
-      <SelectInput optionText="name.en" />
-    </ReferenceInput>
-     */}
-    <TextInput
-      label="Title"
-      source="finishing_type"
-      defaultValue="SF"
-      alwaysOn
-    />
-  </Filter>
-);
+      */}
+
+      <SelectInput
+        alwaysOn
+        source="compound_id"
+        choices={[{ id: "81550825-6d0a-4393-9431-f4e3caa697af", name: "ZEDD" }]}
+      />
+
+      <SelectInput
+        source="finishing_type"
+        choices={[
+          { id: "FF", name: "FF" },
+          { id: "SF", name: "SF" },
+        ]}
+      />
+    </Filter>
+  );
+};
 
 export default function UnitsList(props: ResourceComponentInjectedProps) {
   const classes = useMyDefaultStyles();
   return (
     <List {...props} filters={<UnitsListFilter />}>
       <Datagrid rowClick="edit">
-        <TextField source="finishing_type" />
-        <ReferenceField source="property_type_id" reference="property_types">
+        <TextField source="finishing_type" headerClassName={classes.header} />
+        <ReferenceField
+          source="property_type_id"
+          reference="property_types"
+          headerClassName={classes.header}
+        >
           <TextField source="name.en" />
         </ReferenceField>
-        <ReferenceField source="compound_id" reference="compounds">
+        <ReferenceField
+          source="compound_id"
+          reference="compounds"
+          headerClassName={classes.header}
+        >
           <TextField source="name.en" />
         </ReferenceField>
-        <ReferenceField source="comp_phase_id" reference="comp_phases">
+        <ReferenceField
+          source="comp_phase_id"
+          reference="comp_phases"
+          headerClassName={classes.header}
+        >
           <TextField source="phase_name.en" />
         </ReferenceField>
       </Datagrid>

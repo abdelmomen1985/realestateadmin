@@ -1,6 +1,12 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
-import { ReferenceInput, SelectInput, SimpleForm } from "react-admin";
+import {
+  CheckboxGroupInput,
+  ReferenceArrayInput,
+  ReferenceInput,
+  SelectInput,
+  SimpleForm,
+} from "react-admin";
 import { useMyDefaultStyles } from "../../styles/default";
 // @ts-ignore
 import RichTextInput from "ra-input-rich-text";
@@ -30,12 +36,21 @@ export default function UnitForm(props: any) {
           </ReferenceInput>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6}>
           <ReferenceInput source="comp_phase_id" reference="comp_phases">
             <SelectInput optionText="phase_name.en" />
           </ReferenceInput>
         </Grid>
       </Grid>
+      <div className="fullwidth">
+        <ReferenceArrayInput
+          reference="amenities"
+          source="amenities_arr"
+          label="Amenities"
+        >
+          <CheckboxGroupInput optionText="name.en" optionValue="id" />
+        </ReferenceArrayInput>
+      </div>
 
       <div className="editor-ar fullwidth">
         <RichTextInput source="description.ar" />

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Edit,
-  SimpleForm,
-  ReferenceInput,
-  SelectInput,
-  TextInput,
-  DateInput,
-} from "react-admin";
+import { Edit } from "react-admin";
 import { transformCompound } from "../../utils/transforms";
 import CompoundForm from "./CompoundForm";
 

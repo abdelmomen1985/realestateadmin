@@ -4,7 +4,7 @@ import OutdoorGrillTwoToneIcon from "@material-ui/icons/OutdoorGrillTwoTone";
 // @ts-ignore
 import hasuraDataProvider from "ra-data-hasura";
 import React from "react";
-import { Admin, ListGuesser, Resource } from "react-admin";
+import { Admin, ListGuesser, Resource, EditGuesser } from "react-admin";
 import "./App.css";
 import CompoundCreate from "./components/compounds/CompoundCreate";
 import { CompoundEdit } from "./components/compounds/CompoundEdit";
@@ -19,9 +19,7 @@ import PropertyTypesList from "./components/property_types/PropertyTypesList";
 import UserCreate from "./components/users/UserCreate";
 import UsersList from "./components/users/UsersList";
 import { MyAuthProvider } from "./MyAuthProvider";
-import CustomHomeIcon from "./icons/CustomHomeIcon";
 import UnitCreate from "./components/units/UnitCreate";
-import CustomCallIcon from "./icons/CustomCallIcon";
 
 import {
   ApolloClient,
@@ -32,13 +30,20 @@ import {
 import { Label, Timeline } from "@material-ui/icons";
 import CompPhasesList from "./components/phases/CompPhasesList";
 import UnitsList from "./components/units/UnitsList";
+import { UnitEdit } from "./components/units/UnitEdit";
+import { CustomAmenitiesIcon, CustomCallIcon, CustomHomeIcon } from "./icons";
+import AmenityCreate from "./amenites/AmenityCreate";
+import AmenitiesList from "./amenites/AmenitiesList";
+import AmenityEdit from "./amenites/AmenityEdit";
 
+console.log("%c Mo2Log process.env ", "background: #bada55", process.env);
 const createApolloClient = () => {
   return new ApolloClient({
     link: new HttpLink({
-      uri: "https://feasible-narwhal-77.hasura.app/v1/graphql",
+      uri: "https://realestate.hasura.app/v1/graphql",
       headers: {
-        //Authorization: `Bearer ${authToken}`,
+        "x-hasura-admin-secret":
+          process.env.REACT_APP_HASURA_GRAPHQL_ADMIN_SECRET,
       },
     }),
     cache: new InMemoryCache(),
@@ -46,8 +51,12 @@ const createApolloClient = () => {
 };
 
 const client = createApolloClient();
-const headers = { "content-type": "application/json" };
-const HASURA_URL = "https://feasible-narwhal-77.hasura.app/";
+const headers = {
+  "content-type": "application/json",
+  "x-hasura-admin-secret": process.env.REACT_APP_HASURA_GRAPHQL_ADMIN_SECRET,
+};
+
+const HASURA_URL = "https://realestate.hasura.app/";
 
 function App() {
   return (
@@ -90,6 +99,7 @@ function App() {
             list={UnitsList}
             icon={CustomHomeIcon}
             create={UnitCreate}
+            edit={UnitEdit}
           />
           <Resource name="leads" list={ListGuesser} icon={CustomCallIcon} />
           <Resource
@@ -97,6 +107,13 @@ function App() {
             list={CompPhasesList}
             icon={Timeline}
             options={{ label: "Phases" }}
+          />
+          <Resource
+            name="amenities"
+            list={AmenitiesList}
+            edit={AmenityEdit}
+            create={AmenityCreate}
+            icon={CustomAmenitiesIcon}
           />
         </Admin>
       </ApolloProvider>

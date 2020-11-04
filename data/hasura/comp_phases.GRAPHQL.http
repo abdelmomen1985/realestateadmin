@@ -1,6 +1,7 @@
-POST https://feasible-narwhal-77.hasura.app/v1/graphql
+POST https://realestate.hasura.app/v1/graphql
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
+x-hasura-admin-secret: JWHyL#0zGDgTQoR$6!
 
 query comp_phases($compound_id:uuid!){
   comp_phases (where:{compound_id:{_eq:$compound_id}}){
@@ -13,5 +14,5 @@ query comp_phases($compound_id:uuid!){
 }
 
 {
-  "compound_id":"bb1516c2-986d-4e48-9666-2934ee6532bf"
+  "compound_id":"81550825-6d0a-4393-9431-f4e3caa697af"
 }

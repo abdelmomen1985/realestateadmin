@@ -30,6 +30,7 @@ export const transformPropertyType = (data: Record) => {
 };
 
 export const transformUnit = (data: Record) => {
+  console.log("%c Mo2Log data with amenities ", "background: #bada55", data);
   data.media = { logo: data.internal?.url };
   delete data.internal;
   let unit = data as UnitType;
