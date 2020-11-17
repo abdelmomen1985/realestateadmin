@@ -1,0 +1,9 @@
+POST https://realestate.hasura.app/v1alpha1/pg_dump
+Content-Type: application/json
+X-Hasura-Role: admin
+x-hasura-admin-secret: rKpA@W3S2PlZsK
+
+{
+  "opts": ["-O", "-x", "--data-only" ,"--schema", "public"],
+  "clean_output": true
+}

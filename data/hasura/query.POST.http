@@ -1,0 +1,12 @@
+
+POST https://realestate.hasura.app/v1/query
+Content-Type: application/json
+X-Hasura-Role: admin
+x-hasura-admin-secret: rKpA@W3S2PlZsK
+
+{
+	"type": "run_sql",
+	"args": {
+		"sql": "select * from units;"
+	}
+}

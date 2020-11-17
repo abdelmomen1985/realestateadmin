@@ -6,16 +6,24 @@ import {
   ReferenceInput,
   SelectInput,
   SimpleForm,
+  TextInput,
 } from "react-admin";
 import { useMyDefaultStyles } from "../../styles/default";
 // @ts-ignore
 import RichTextInput from "ra-input-rich-text";
 
-export default function UnitForm(props: any) {
+const SanitizedFormContent = () => {
   const classes = useMyDefaultStyles();
   return (
-    <SimpleForm {...props}>
+    <>
       <Grid container spacing={3} className={classes.fullwidth}>
+        <Grid item xs={12} sm={6}>
+          <TextInput
+            source="cust_id"
+            className={classes.fullwidth}
+            placeholder="Cust Id"
+          />
+        </Grid>
         <Grid item xs={12} sm={6}>
           <ReferenceInput source="property_type_id" reference="property_types">
             <SelectInput optionText="name.en" />
@@ -45,6 +53,7 @@ export default function UnitForm(props: any) {
       <div className="fullwidth">
         <ReferenceArrayInput
           reference="amenities"
+          resource=""
           source="amenities_arr"
           label="Amenities"
         >
@@ -57,6 +66,22 @@ export default function UnitForm(props: any) {
       </div>
 
       <RichTextInput source="description.en" />
+    </>
+  );
+};
+
+// Just ignore hases
+export default function UnitForm({
+  hasCreate,
+  hasEdit,
+  hasList,
+  hasShow,
+  basePath,
+  ...props
+}: any) {
+  return (
+    <SimpleForm {...props}>
+      <SanitizedFormContent />
     </SimpleForm>
   );
 }

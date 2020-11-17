@@ -1,31 +1,21 @@
-import { Button, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 // @ts-ignore
 import RichTextInput from "ra-input-rich-text";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
-  ChipField,
   ReferenceInput,
-  ReferenceManyField,
   SelectInput,
   SimpleForm,
-  SingleFieldList,
   TextInput,
-  useRefresh,
 } from "react-admin";
 import { useMyDefaultStyles } from "../../styles/default";
 import PhasesWidget from "../phases/PhasesWidget";
 import SingleImage from "../utils/SingleImage";
 
-export default function CompoundForm(props: any) {
+const SanitizedFormContent = () => {
   const classes = useMyDefaultStyles();
-  const [changeLogo, setChangeLogo] = useState(false);
-
-  useEffect(() => {
-    console.log("%c Mo2Log CompoundForm refresh", "background: #bada55");
-  }, []);
-
   return (
-    <SimpleForm {...props}>
+    <>
       <SingleImage mediaIndex="logo" />
       <ReferenceInput source="developer_id" reference="developers">
         <SelectInput optionText="name.en" />
@@ -54,6 +44,21 @@ export default function CompoundForm(props: any) {
       </ReferenceManyField>
     */}
       <PhasesWidget />
+    </>
+  );
+};
+// To just ignore them
+export default function CompoundForm({
+  hasCreate,
+  hasEdit,
+  hasList,
+  hasShow,
+  basePath,
+  ...props
+}: any) {
+  return (
+    <SimpleForm {...props}>
+      <SanitizedFormContent />
     </SimpleForm>
   );
 }
