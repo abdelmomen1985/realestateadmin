@@ -1,5 +1,3 @@
 GET https://app.sakneen.com/apis/marketplace/properties
-origin: https://www.sakneen.com
-referer: https://www.sakneen.com/
 app-request-origin: sakneen-platform
 Content-type: application/json

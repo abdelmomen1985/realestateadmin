@@ -19,9 +19,9 @@ const SanitizedFormContent = () => {
       <Grid container spacing={3} className={classes.fullwidth}>
         <Grid item xs={12} sm={6}>
           <TextInput
-            source="cust_id"
+            source="ref_id"
             className={classes.fullwidth}
-            placeholder="Cust Id"
+            placeholder="Reference Id"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -35,6 +35,7 @@ const SanitizedFormContent = () => {
             choices={[
               { id: "FF", name: "FF" },
               { id: "SF", name: "SF" },
+              { id: "CS", name: "CS" },
             ]}
           />
         </Grid>

@@ -50,9 +50,9 @@ export default function UnitsList(props: ResourceComponentInjectedProps) {
     <List {...props} filters={<UnitsListFilter />}>
       <Datagrid rowClick="edit">
         <TextField
-          source="cust_id"
+          source="ref_id"
           headerClassName={classes.header}
-          label="Unit Ref"
+          label="Unit Ref Id"
         />
         <TextField source="finishing_type" headerClassName={classes.header} />
         <ReferenceField
