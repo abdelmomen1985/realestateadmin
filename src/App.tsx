@@ -43,13 +43,22 @@ import {
   CustomAgenciesIcon,
   CustomAmenitiesIcon,
   CustomCallIcon,
+  CustomCompanyIcon,
   CustomHomeIcon,
+  CustomTicketsIcon,
   CustomUsersIcon,
 } from "./icons";
 import { MyAuthProvider } from "./MyAuthProvider";
 import buildGraphQLProvider from "ra-data-graphql";
 import CompaniesList from "./companies/CompaniesList";
 import CompanyCreate from "./companies/CompanyCreate";
+import {
+  DELETE_COMPANY,
+  GET_COMPANIES,
+  INSERT_COMPANY,
+} from "./queries/companies";
+import TicketsList from "./tickets/TicketsList";
+import { GET_TICKETS } from "./queries/tickets";
 
 const headers = {
   "content-type": "application/json",
@@ -78,40 +87,46 @@ const hasuraDP = hasuraDataProvider(
 
 const getCompanies = async () => {
   let resp = await client.query({
-    query: gql`
-      query companies {
-        companies {
-          id
-          properties {
-            name
-            name_ar
-            logo
-          }
-        }
-      }
-    `,
+    query: GET_COMPANIES,
   });
-  console.log(resp.data);
   return { data: resp.data?.companies, total: resp.data?.companies.length };
+};
+
+const getTickets = async () => {
+  const resp = await client.query({
+    query: GET_TICKETS,
+  });
+  return { data: resp.data.tickets, total: resp.data.tickets.length };
 };
 
 const deleteCompany = async (id: string) => {
   let resp = await client.mutate({
-    mutation: gql`
-      mutation delete_company($id: ID!) {
-        delete_company(id: $id) {
-          id
-        }
-      }
-    `,
+    mutation: DELETE_COMPANY,
     variables: { id },
   });
+};
+
+const insertCompany = async (data: any) => {
+  let resp = await client.mutate({
+    mutation: INSERT_COMPANY,
+    variables: data,
+  });
+
+  const { id, properties } = resp.data.insert_company;
+  return {
+    data: {
+      id,
+      properties,
+    },
+  };
 };
 
 const customDP = {
   getList: (resource, params) => {
     if (resource === "companies") {
       return getCompanies();
+    } else if (resource === "tickets") {
+      return getTickets();
     }
     return hasuraDP("GET_LIST", resource, params);
   },
@@ -142,9 +157,18 @@ const customDP = {
   },
   deleteMany: (resource, params) => {
     console.log("%c Mo2Log  deleteMany ", "background: #bada55", params);
+    if (resource === "companies") {
+      let first = params.ids[0];
+      // TODO all
+      return deleteCompany(first.toString());
+    }
     return hasuraDP("DELETE_MANY", resource, params);
   },
   create: (resource, params) => {
+    if (resource === "companies") {
+      console.log(params);
+      return insertCompany(params.data);
+    }
     return hasuraDP("CREATE", resource, params);
   },
 } as DataProvider;
@@ -197,7 +221,7 @@ function App() {
             create={UnitCreate}
             edit={UnitEdit}
           />
-          <Resource name="leads" list={ListGuesser} icon={CustomCallIcon} />
+
           <Resource
             name="comp_phases"
             list={CompPhasesList}
@@ -212,9 +236,23 @@ function App() {
             icon={CustomAmenitiesIcon}
           />
           <Resource
+            options={{ label: "CRM Companies" }}
             name="companies"
+            icon={CustomCompanyIcon}
             list={CompaniesList}
             create={CompanyCreate}
+          />
+          <Resource
+            name="tickets"
+            list={TicketsList}
+            icon={CustomTicketsIcon}
+            options={{ label: "CRM Tickets" }}
+          />
+          <Resource
+            name="leads"
+            list={ListGuesser}
+            icon={CustomCallIcon}
+            options={{ label: "CRM Leads" }}
           />
         </Admin>
       </ApolloProvider>

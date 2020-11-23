@@ -1,6 +1,7 @@
 import { Avatar, makeStyles } from "@material-ui/core";
 import React from "react";
 import {
+  ChipField,
   Datagrid,
   List,
   ResourceComponentInjectedProps,
@@ -16,34 +17,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AvatarField = ({ record }: any) => {
-  const classes = useStyles();
-  if (record)
-    return (
-      <Avatar
-        className={classes.purple}
-        src={record.properties.logo}
-        alt={(record.properties.name as string).toUpperCase()}
-      ></Avatar>
-    );
-  return <></>;
-};
-export default function CompaniesList(props: ResourceComponentInjectedProps) {
+export default function TicketsList(props: ResourceComponentInjectedProps) {
   const classes = useMyDefaultStyles();
   return (
     <>
       <List {...props}>
         <Datagrid rowClick="edit">
           <TextField source="id" label="ID" headerClassName={classes.header} />
-          <AvatarField />
+
           <TextField
-            source="properties.name"
-            label="Name"
+            source="properties.subject"
+            label="Subject"
             headerClassName={classes.header}
+            style={{ fontWeight: "bold" }}
           />
-          <TextField
-            source="properties.name_ar"
-            label="Name Ar"
+
+          <ChipField
+            source="stage.label"
+            label="Stage"
             headerClassName={classes.header}
           />
         </Datagrid>
