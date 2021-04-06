@@ -1,7 +1,7 @@
-POST https://realestate.hasura.app/v1/graphql
+POST https://realestatep.hasura.app/v1/graphql
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
-x-hasura-admin-secret: JWHyL#0zGDgTQoR$6!
+x-hasura-admin-secret: rKpA@W3S2PlZsK
 
 query comp_phases($compound_id:uuid!){
   comp_phases (where:{compound_id:{_eq:$compound_id}}){

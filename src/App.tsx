@@ -68,7 +68,7 @@ const headers = {
 const createApolloClient = () => {
   return new ApolloClient({
     link: new HttpLink({
-      uri: "https://realestate.hasura.app/v1/graphql",
+      uri: "https://realestatep.hasura.app/v1/graphql",
       headers,
     }),
     cache: new InMemoryCache(),
@@ -81,7 +81,7 @@ const createApolloClient = () => {
 const client = createApolloClient();
 
 const hasuraDP = hasuraDataProvider(
-  `https://realestate.hasura.app/`,
+  `https://realestatep.hasura.app/`,
   headers
 ) as LegacyDataProvider;
 

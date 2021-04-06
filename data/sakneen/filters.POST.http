@@ -1,4 +1,4 @@
-POST https://app.sakneen.com/apis/marketplace/filters?sort=financial_plan.monthly_payment&limit=10000 HTTP/1.1
+POST https://app.sakneen.com/apis/marketplace/filters?sort=financial_plan.monthly_payment&limit=100 HTTP/1.1
 app-request-origin: sakneen-platform
 Content-type: application/json
 
