@@ -59,6 +59,7 @@ import {
 } from "./queries/companies";
 import TicketsList from "./tickets/TicketsList";
 import { GET_TICKETS } from "./queries/tickets";
+import { theme } from "./theme";
 
 const headers = {
   "content-type": "application/json",
@@ -181,6 +182,7 @@ function App() {
           authProvider={new MyAuthProvider()}
           dataProvider={customDP}
           dashboard={Dashboard}
+          theme={theme}
         >
           <Resource
             name="developers"

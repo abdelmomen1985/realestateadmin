@@ -17,7 +17,7 @@ export default function UsersList(props: ResourceComponentInjectedProps) {
         <Datagrid rowClick="edit">
           {/* <TextField source="id" /> */}
           <TextField source="name" headerClassName={classes.header} />
-          <TextField source="email" headerClassName={classes.header} />
+          <TextField source="username" headerClassName={classes.header} />
         </Datagrid>
       </List>
     </>

@@ -1,0 +1,18 @@
+POST https://api.notion.com/v1/pages
+Authorization: Bearer secret_hMiRkt6LcWCNH7M29et7ojdksQAlNMfePPlnSIwCIgb
+Content-Type: application/json
+
+{
+  "parent": {"database_id":"583e014f80f44fb5a664c500e7734d27"},
+  "properties": {
+    "Name" : {
+      "title" : [
+        {
+          "text" : {
+            "content": "test adding next element"
+          }
+        }
+      ]
+    }
+  }
+}
